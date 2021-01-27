@@ -51,7 +51,26 @@
         <br>
         <script>
             function our_layers(map, options){
-                let points = new L.GeoJSON.AJAX("{% url 'main' %}",{
+                let main = new L.GeoJSON.AJAX("{% url 'main' %}",{
+                    onEachFeature: function(feature,layer){
+                        layer.bindPopup(feature.properties.name.toString());
+                    },
+        
+                });
+                //datasets.addTo(map);
+                main.addTo(map);
+
+                let datasets = new L.GeoJSON.AJAX("{% url 'regional' %}",{
+                    onEachFeature: function(feature,layer){
+                        layer.bindPopup(feature.properties.name.toString());
+                        marker.bindPopup.openPopup();
+                    },
+        
+                });
+                //datasets.addTo(map);
+                datasets.addTo(map);
+
+                let points = new L.GeoJSON.AJAX("{% url 'field' %}",{
                     onEachFeature: function(feature,layer){
                         layer.bindPopup(feature.properties.name.toString());
                     },
@@ -59,6 +78,18 @@
                 });
                 //datasets.addTo(map);
                 points.addTo(map);
+
+
+                var popup = L.popup();
+
+                    function onMapClick(e) {
+                        popup
+                            .setLatLng(e.latlng)
+                            .setContent("You clicked the map at " + e.latlng.toString())
+                            .openOn(map);
+                    }
+
+                    map.on('click', onMapClick);
               
             }
         </script>
