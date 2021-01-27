@@ -1,1 +1,1 @@
-web: gunicorn ngo_nairobi.wsgi
+web: gunicorn NGO_NAIROBI.wsgi
