@@ -51,28 +51,12 @@
         <br>
         <script>
             function our_layers(map, options){
-
-                var points = new L.GeoJSON.AJAX("{% url 'main' %}",{
+                let points = new L.GeoJSON.AJAX("{% url 'main' %}",{
                     onEachFeature: function(feature,layer){
                         layer.bindPopup(feature.properties.name.toString());
                     },
         
                 });
-
-                var points = new L.GeoJSON.AJAX("{% url 'regional' %}",{
-                    onEachFeature: function(feature,layer){
-                        layer.bindPopup(feature.properties.name.toString());
-                    },
-        
-                });
-
-                var points = new L.GeoJSON.AJAX("{% url 'field' %",{
-                    onEachFeature: function(feature,layer){
-                        layer.bindPopup(feature.properties.name.toString());
-                    },
-        
-                });
-        
                 //datasets.addTo(map);
                 points.addTo(map);
               

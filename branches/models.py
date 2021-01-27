@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.gis.db import models
+from djgeojson.fields import PointField
 
 # Create your models here.
 class Main_Office(models.Model):
