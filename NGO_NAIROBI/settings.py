@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '%6om&c)t3bc0qyt^a2ep=xnywfk4&40%c7(nns3d!%75-vho%8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'ngo-nairobi.herokuapp.com']
 
@@ -138,7 +138,7 @@ USE_TZ = True
 STATIC_URL = '/static/'#location where django collect all static files
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')# location where you will store your static files
 
-]
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
@@ -157,6 +157,3 @@ SERIALIZATION_MODULES = {
     "geojson": "django.contrib.gis.serializers.geojson", 
  }
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
