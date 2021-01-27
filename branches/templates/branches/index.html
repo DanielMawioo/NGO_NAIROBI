@@ -63,6 +63,7 @@
                     attribution: 'Map data: &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
                   });
 
+
               let main = new L.GeoJSON.AJAX("{% url 'main' %}",{
                   onEachFeature: function(feature,layer){
                       layer.bindPopup(feature.properties.name.toString());
@@ -72,19 +73,25 @@
               //datasets.addTo(map);
               main.addTo(map);
 
-              let datasets = new L.GeoJSON.AJAX("{% url 'regional' %}",{
+              let regional = new L.GeoJSON.AJAX("{% url 'regional' %}",{
                   onEachFeature: function(feature,layer){
-                      layer.bindPopup(feature.properties.name.toString());
-                      marker.bindPopup.openPopup();
+                    layer.bindPopup( 
+                        "Location: " + feature.properties.name +"<br>" +
+                        "No.of_staff: " + feature.properties.number_of_staff +"<br>" +
+                        "Issues Addressed: " + feature.properties.issues_addressed +"<br>" 
+                        ).openPopup();;
                   },
       
               });
               //datasets.addTo(map);
-              datasets.addTo(map);
+              regional.addTo(map);
 
               let points = new L.GeoJSON.AJAX("{% url 'field' %}",{
                   onEachFeature: function(feature,layer){
-                      layer.bindPopup(feature.properties.name.toString());
+                      layer.bindPopup( 
+                        "Location: " + feature.properties.name +"<br>" 
+                        + "No.of_staff: " + feature.properties.number_of_staff +"<br>"
+                        ).openPopup();;
                   },
       
               });
@@ -111,7 +118,7 @@
               var groupedOverlays = {
                   "Layers": {
                     "main": main,
-                    "regional": datasets,
+                    "regional": regional,
                     "field": points
                   }
 

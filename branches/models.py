@@ -25,7 +25,7 @@ class Regional_Office(models.Model):
     area = models.IntegerField()
     location = models.PointField(srid= 4326)
     number_of_staff = models.IntegerField()
-    issues_addressed = models.ManyToManyField(Issues_Addressed, null=True, blank=True)
+    issues_addressed = models.ManyToManyField(Issues_Addressed, blank=True)
     slug = models.SlugField(null=True, blank=True)
     active = models.BooleanField(default=False)
 
@@ -36,7 +36,7 @@ class Field_Offices(models.Model):
     field_branch = models.ForeignKey(Regional_Office, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     number_of_staff = models.IntegerField()
-    issues_addressed = models.ManyToManyField(Issues_Addressed, null=True, blank=True)
+    issues_addressed = models.ManyToManyField(Issues_Addressed, blank=True)
     name = models.CharField(max_length=50)
     location = models.PointField(srid= 4326)
     slug = models.SlugField(null=True, blank=True)
