@@ -1,1 +1,1 @@
-web: gunicorn NGO_NAIROBI.wsgi --log-file -
+web: gunicorn NGO_NAIROBI.wsgi 
