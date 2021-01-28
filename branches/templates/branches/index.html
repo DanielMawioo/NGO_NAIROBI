@@ -8,6 +8,9 @@
 	{% leaflet_css %}
        
         <title>NGO-NAIROBI</title>
+         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -74,8 +77,31 @@
               main.addTo(map);
 
               let regional = new L.GeoJSON.AJAX("{% url 'regional' %}",{
+                style: function colors(feature){
+                        switch(feature.properties.name){
+                            case 'machakos-region':
+                                return{
+                                    color: 'orange',
+                                    fillOpacity: 0.8
+                                };
+                            break;
+                            case 'Nyeri Office':
+                                return{
+                                    color: 'red',
+                                    fillOpacity: 0.8
+                                };
+                            break;
+                            break;
+                            case 'Mombasa':
+                                return{
+                                    color: 'green',
+                                    fillOpacity: 0.8
+                                };
+        
+                        }
+                    },
                   onEachFeature: function(feature,layer){
-                    layer.bindPopup( 
+                    layer.bindPopup(
                         "Location: " + feature.properties.name +"<br>" +
                         "No.of_staff: " + feature.properties.number_of_staff +"<br>" +
                         "Issues Addressed: " + feature.properties.issues_addressed +"<br>" 
@@ -87,7 +113,7 @@
               regional.addTo(map);
 
               let points = new L.GeoJSON.AJAX("{% url 'field' %}",{
-                  onEachFeature: function(feature,layer){
+                  onEachFeature: function(feature,layer){ 
                       layer.bindPopup( 
                         "Location: " + feature.properties.name +"<br>" 
                         + "No.of_staff: " + feature.properties.number_of_staff +"<br>"
@@ -109,6 +135,11 @@
                   }
 
                   map.on('click', onMapClick);
+
+                  map.on('overlayadd', function(e){
+                    var strDiv = "#" + e.name
+                    alert('Show "'+strDiv+'"');
+                  });
 
               var baseLayers = {
                   "OSM": osm,
