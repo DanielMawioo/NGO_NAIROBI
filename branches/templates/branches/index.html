@@ -55,7 +55,17 @@
     </div>
         <br>
         <script>
-            function our_layers(map, options){
+             function our_layers(map, options){
+            var datasets = new L.GeoJSON.AJAX("{% url 'county' %}",{
+                    onEachFeature: function(feature,layer){
+                      layer.bindPopup(feature.properties.county_nam.toString());
+                    }
+
+                  });
+
+                  datasets.addTo(map);
+
+            
               var osm = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         maxZoom: 19,
                         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -79,26 +89,18 @@
               let regional = new L.GeoJSON.AJAX("{% url 'regional' %}",{
                 style: function colors(feature){
                         switch(feature.properties.name){
-                            case 'machakos-region':
+                            case 'Machakos Office':
                                 return{
                                     color: 'orange',
                                     fillOpacity: 0.8
                                 };
-                            break;
-                            case 'Nyeri Office':
+                              break;
+                              case 'Nakuru':
                                 return{
-                                    color: 'red',
+                                    color: 'orange',
                                     fillOpacity: 0.8
                                 };
-                            break;
-                            break;
-                            case 'Mombasa':
-                                return{
-                                    color: 'green',
-                                    fillOpacity: 0.8
-                                };
-        
-                        }
+                              }
                     },
                   onEachFeature: function(feature,layer){
                     layer.bindPopup(
@@ -148,6 +150,7 @@
 
               var groupedOverlays = {
                   "Layers": {
+                    "County_Boundaries": datasets,
                     "Main Office": main,
                     "Regional Offices": regional,
                     "Field Offices": points

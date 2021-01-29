@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.serializers import serialize
-from .models import Main_Office, Regional_Office, Field_Offices
+from .models import Main_Office, Regional_Office, Field_Offices,Counties
 
 # Create your views here.
 def index(request):
@@ -21,3 +21,7 @@ def regional_datasets(request):
 def field_datasets(request):
     points = serialize('geojson', Field_Offices.objects.all())
     return HttpResponse(points,content_type='json',)
+
+def county_datasets(request):
+	counties = serialize('geojson', Counties.objects.all())
+	return HttpResponse(counties,content_type='json')

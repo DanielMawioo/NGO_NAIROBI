@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'NGO_NAIROBI.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'ngo_branches1',
+        'NAME': 'newngo',
         'USER': 'postgres',
         'PASSWORD': 'admin12345',
         'HOST': 'localhost',

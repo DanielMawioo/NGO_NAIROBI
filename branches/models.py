@@ -45,3 +45,19 @@ class Field_Offices(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Counties(models.Model):
+    objectid = models.BigIntegerField(null=True)
+    id_field = models.BigIntegerField(null=True)
+    county_nam = models.CharField(max_length=80,null=True )
+    const_code = models.BigIntegerField(null=True)
+    constituen = models.CharField(max_length=80, null=True)
+    county_cod = models.BigIntegerField(null=True)
+    shape_leng = models.FloatField(null=True)
+    shape_area = models.FloatField(null=True)
+    geom = models.MultiPolygonField(srid=4326)
+
+
+    def __unicode__(self):
+    	return self.counties
