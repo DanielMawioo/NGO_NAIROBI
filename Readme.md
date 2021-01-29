@@ -32,7 +32,7 @@ pip3 install -r requirements.txt
 ```
 ## Sync and Running application
 ```
-cd agricom
+cd ngo-nairobi
 python manage.py migrate
 python manage.py runserver
 on browser: localhost:8000
