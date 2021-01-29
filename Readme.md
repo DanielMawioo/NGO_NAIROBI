@@ -1,4 +1,5 @@
 # NGO_NAIROBI--INTERVIEW ASSIGNMENT ONB-KENYA
+Screenshot folder available
 
 This is a geodjango project(NGO-NAIROBI) developed in geodjango for back-end, Leaflet.js for front-end and Postgresql for Database.
 It uses the Geodjango module in Django to include the mapping aspect of the project. This is the entire project covered in all the episodes. 
